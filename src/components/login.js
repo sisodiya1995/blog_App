@@ -107,12 +107,13 @@ class Login extends React.Component {
     return (
       <>
         {/* <Header /> */}
+
         <h3>Sign IN</h3>
         
-         <NavLink to ='/signup' exact>
+         <NavLink to ='/signup' style={{display : "flex",justifyContent :"center" ,color :"#5CB85C",textDecoration :"none",margin :"10px 0px",fontSize :"18px"}} exact>
          Need an account ?
          </NavLink>
-        <form onSubmit={this.handlesubmit}>
+        <form className="signup-form" onSubmit={this.handlesubmit}>
           <input
             type="email"
             placeholder="email"
@@ -120,7 +121,7 @@ class Login extends React.Component {
             value={this.state.email}
             onChange={this.handlechange}
           />
-          <p>{this.state.errors.email}</p>
+          <p className="error">{this.state.errors.email}</p>
           <br></br>
           <input
             type="password"
@@ -129,9 +130,12 @@ class Login extends React.Component {
             value={this.state.password}
             onChange={this.handlechange}
           />
-          <p>{this.state.errors.password}</p>
+          <p className="error">{this.state.errors.password}</p>
           <br></br>
-          <button type="submit">Sign in</button>
+          <div className="flex justify-end">
+          <button type="submit" className="btn">Sign in</button>
+          </div>
+         
         </form>
       </>
     );

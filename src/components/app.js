@@ -8,6 +8,8 @@ import Signup from "./signup";
 import Login from "./login";
 import SingleArticle from "./singleArticle";
 import NewPost from "./newpost";
+import Profile from "./profile";
+import Setting from "./setting";
 //import Tags from './tags';
 class App extends React.Component {
   constructor(props) {
@@ -90,10 +92,10 @@ function AuthenticatedApp(props) {
         <NewPost user={props.user} />
       </Route>
       <Route exact path="/setting">
-        {/* <Setting user={props.user} updateUser={props.updateUser} /> */}
+        <Setting user={props.user} updateUser={props.updateUser} />
       </Route>
       <Route exact path="/profile/:username">
-        {/* <Profile user={props.user} /> */}
+        <Profile user={props.user} />
       </Route>
       <Route path="/article/:slug">
         <SingleArticle user={props.user} />

@@ -1,5 +1,6 @@
 import React from "react";
 import Articles from "./articles";
+import Hero from "./hero";
 class Tags extends React.Component {
   constructor(props) {
     super(props);
@@ -7,7 +8,7 @@ class Tags extends React.Component {
       tags: [],
       articles: "",
       isDisplay: false,
-      tagname : ""
+      tagname: "",
     };
   }
 
@@ -17,8 +18,13 @@ class Tags extends React.Component {
     const tagsURL = `https://mighty-oasis-08080.herokuapp.com/api/articles/?tag=${tags}`;
     fetch(tagsURL)
       .then((res) => res.json())
-      .then((data) => this.setState({ articles: data.articles , isDisplay : true 
-      , tagname : tags}));
+      .then((data) =>
+        this.setState({
+          articles: data.articles,
+          isDisplay: true,
+          tagname: tags,
+        })
+      );
   };
   componentDidMount() {
     const tagsURL = "https://mighty-oasis-08080.herokuapp.com/api/tags";
@@ -27,37 +33,48 @@ class Tags extends React.Component {
       .then((tags) => this.setState({ tags: tags.tags }));
   }
 
-  handleGlobal =() => {
+  handleGlobal = () => {
     // this.setState((prev)  =>{
     //  return {
     //    isDisplay : ! prev.isDisplay
     //  }
     // })
     this.setState({
-      isDisplay : false
-    })
-  }
+      isDisplay: false,
+    });
+  };
   render() {
     return (
       <>
-      <button onClick={this.handleGlobal}>global</button>
-        <Articles info={this.state} />
+        <Hero />
         
-        {/* {
-  !this.props.info? this.setState({articles : this.state.articles}) :this.setState({articles : this.props.info})
-} */}
+        <div className="home-articles">
+        <div className="articles flex-70">
+          {" "}
+          <button onClick={this.handleGlobal} className= "globla-btn">Global Feed</button>
+          {/* <button onClick={this.handleGlobal} className= "globla-btn"> {this.state.tagname}</button> */}
+          <Articles info={this.state} />
+        </div>
 
-        {this.state.tags.map((tag) => {
-          return (
-            <button
-              onClick={(event) => {
-                this.handleclick(event);
-              }}
-            >
-              {tag}
-            </button>
-          );
-        })}
+        <div className="tags-side-bar flex-25">
+        <h4 className="tags-title">Popular Tags</h4>
+          {this.state.tags.map((tag) => {
+            return (
+              <>
+              
+              <button
+                onClick={(event) => {
+                  this.handleclick(event);
+                }}
+              className ="tags-btn">
+                {tag}
+              </button>
+              </>
+            );
+          })}
+        </div>
+        </div>
+       
       </>
     );
   }

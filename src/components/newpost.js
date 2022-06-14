@@ -63,14 +63,15 @@ class NewPost extends React.Component {
     return (
       <>
         <div>
-          <form action="" className="form-control">
-            <h3>Add Your Article</h3>
-            <input
+          <form action="" className="signup-form-1">
+            <h4>Add Your Article</h4>
+            <input className='bottom'
               type="text"
               name="title"
               placeholder="Article Title"
               onChange={this.handleChange}
               value={title}
+              
             />
 
             <input
@@ -97,9 +98,9 @@ class NewPost extends React.Component {
               onChange={this.handleChange}
               value={tagList}
             />
-            <div>
+            <div className="flex justify-end width">
               <button
-                className="publish-btn"
+                className="btn"
                 type="submit"
                 onClick={this.handleSubmit}
               >
