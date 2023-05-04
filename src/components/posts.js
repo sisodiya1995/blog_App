@@ -1,12 +1,11 @@
 import React from 'react';
-//import Loader from './Loader';
 import Post from './post';
 
 function Posts(props) {
   let { articles, error } = props;
   console.log(articles);
   if (!articles) {
-    return <h2>loadinf ..</h2>;
+    return <h2>loading..</h2>;
   }
 
   if (error) {

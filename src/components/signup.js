@@ -20,7 +20,7 @@ class Signup extends React.Component {
   handlesubmit = (event) => {
     const { username, email, password } = this.state;
     event.preventDefault();
-    fetch("https://mighty-oasis-08080.herokuapp.com/api/users", {
+    fetch("https://api.realworld.io/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +32,7 @@ class Signup extends React.Component {
           return res.json().then(({ errors }) => {
             return Promise.reject(errors);
           });
-          // throw new Error('Fatch is not successful');
+          
         }
         return res.json();
       })
@@ -76,9 +76,20 @@ class Signup extends React.Component {
       <>
         <form className="signup-form" onSubmit={this.handlesubmit}>
           <h3>Sign Up</h3>
-          <NavLink to="/signin" style={{display : "flex",justifyContent :"center" ,color :"#5CB85C",textDecoration :"none",margin :"10px 0px",fontSize :"18px"}} exact>
+          <NavLink
+            to="/signin"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              color: "#5CB85C",
+              textDecoration: "none",
+              margin: "10px 0px",
+              fontSize: "18px",
+            }}
+            exact
+          >
             Have an account ?
-          </NavLink> 
+          </NavLink>
           <br></br>
           <input
             type="text"
@@ -108,9 +119,10 @@ class Signup extends React.Component {
           <p className="error">{this.state.errors.password}</p>
           <br></br>
           <div className="flex justify-end ">
-          <button className="btn" type="submit">Sign up</button>
+            <button className="btn" type="submit">
+              Sign up
+            </button>
           </div>
-          
         </form>
       </>
     );

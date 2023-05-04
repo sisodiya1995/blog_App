@@ -543,3 +543,54 @@ table {
     background-color: rgb(241, 237, 237);
     padding: 10px 20px;
   }
+
+  .loader {
+    border: 10px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 10px solid #3498db;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .bouncing-loader {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .bouncing-loader > div {
+    width: 16px;
+    height: 16px;
+    margin: 3px 6px;
+    border-radius: 50%;
+    background-color: #a3a1a1;
+    opacity: 1;
+    animation: bouncing-loader 0.6s infinite alternate;
+  }
+  @keyframes bouncing-loader {
+    to {
+      opacity: 0.1;
+      transform: translateY(-16px);
+    }
+  }
+  
+  .bouncing-loader > div:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .bouncing-loader > div:nth-child(3) {
+    animation-delay: 0.4s;
+  }

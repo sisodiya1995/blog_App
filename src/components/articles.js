@@ -1,20 +1,18 @@
 import React from "react";
-// import Header from "./header";
-import Hero from "./hero";
-//import Tags from "./tags";
-import moment from 'moment'
+import Loader from "./loder";
+import moment from "moment";
 import { NavLink } from "react-router-dom";
 class Articles extends React.Component {
   constructor() {
     super();
     this.state = {
-      blogs: [],
+      blogs: null,
       blogcount: "",
     };
   }
   componentDidMount() {
     const articlesURL =
-      "https://mighty-oasis-08080.herokuapp.com/api/articles?limit=10";
+      "https://api.realworld.io/api/articles?limit=10";
     fetch(articlesURL)
       .then((res) => res.json())
       .then((articles) =>
@@ -28,7 +26,7 @@ class Articles extends React.Component {
     let val = event.target.innerText;
     //let info = this.props.info;
 
-    const articlesURL = `https://mighty-oasis-08080.herokuapp.com/api/articles?limit=10&&offset=${
+    const articlesURL = `https://api.realworld.io/api/articles?limit=10&&offset=${
       val * 10
     }`;
     fetch(articlesURL)
@@ -47,9 +45,13 @@ class Articles extends React.Component {
     }
     console.log(buttoncount);
     console.log(this.props.info, "ingo");
+
+    if (!this.state.blogs) {
+      return <Loader />;
+    }
     return (
       <>
-        {/* <Hero /> */}
+      
         {this.props.info.isDisplay === false ? (
           <div>
             {this.state.blogs.map((article) => {
@@ -75,10 +77,14 @@ class Articles extends React.Component {
                             </p>
                           </NavLink>
 
-                          <p>{moment(article.createdAt).format('dd-MM-YYYY')}</p>
+                          <p>
+                            {moment(article.createdAt).format("dd-MM-YYYY")}
+                          </p>
                         </div>
                       </div>
-                      <button className="fav-count">{article.favoritesCount}</button>
+                      <button className="fav-count">
+                        {article.favoritesCount}
+                      </button>
                     </div>
                     <p className="arti-title">{article.title}</p>
                     <p className="arti-des">{article.description}</p>
@@ -107,16 +113,12 @@ class Articles extends React.Component {
           </div>
         ) : (
           <div className="tag-article">
-            <button className= "globla-btn taginfo"># {this.props.info.tagname}</button>
+            <button className="globla-btn taginfo">
+              # {this.props.info.tagname}
+            </button>
             {this.props.info.articles.map((article) => {
               return (
                 <>
-                  {/* <img src={article.author.image} alt="img" />
-                  <p>{article.author.username}</p>
-                  <p className="title">{article.title}</p>
-                  <p>{article.description}</p>
-                  <NavLink to={`/article/${article.slug}`}>More ...</NavLink> */}
-
                   <article>
                     <div className="flex align-center padding-top">
                       <figure>
@@ -172,7 +174,6 @@ class Articles extends React.Component {
             </button>
           );
         })}
-        {/* <Tags/> */}
       </>
     );
   }

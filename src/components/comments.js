@@ -1,7 +1,6 @@
 import React from 'react';
-//import { articleURL } from '../utils/constant';
 import Comment from './comment';
-// import Loader from './Loader';
+
 
 class Comments extends React.Component {
   componentDidMount() {
@@ -9,7 +8,7 @@ class Comments extends React.Component {
   }
 
   handelDelete = (id) => {
-    fetch('https://mighty-oasis-08080.herokuapp.com/api/articles'+ `/${this.props.slug}/comments/${id}`, {
+    fetch('https://api.realworld.io/api/articles'+ `/${this.props.slug}/comments/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -27,7 +26,7 @@ class Comments extends React.Component {
         <section>
           <ul>
             {this.props.state.comment.map((singleComment) => {
-              console.log(singleComment);
+              //console.log(singleComment);
               return (
                 <Comment
                   key={singleComment.id}

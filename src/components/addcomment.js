@@ -1,5 +1,4 @@
 import React from 'react';
-//import { articleURL } from '../utils/constant';
 import Comments from './comments';
 class AddComment extends React.Component {
   state = {
@@ -16,7 +15,7 @@ class AddComment extends React.Component {
   handelSubmit = (event) => {
     event.preventDefault();
 
-    fetch("https://mighty-oasis-08080.herokuapp.com/api/articles" + `/${this.props.slug}/comments`, {
+    fetch("https://api.realworld.io/api/articles" + `/${this.props.slug}/comments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,7 +45,7 @@ class AddComment extends React.Component {
   };
 
   fetchComment = () => {
-    fetch('https://mighty-oasis-08080.herokuapp.com/api/articles' + `/${this.props.slug}/comments`, {
+    fetch('https://api.realworld.io/api/articles' + `/${this.props.slug}/comments`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

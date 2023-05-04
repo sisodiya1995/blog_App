@@ -1,8 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Header from "./header";
-//import Hero from './hero';
-//import Articles from './articles';
 import Tags from "./tags";
 import Signup from "./signup";
 import Login from "./login";
@@ -10,7 +8,8 @@ import SingleArticle from "./singleArticle";
 import NewPost from "./newpost";
 import Profile from "./profile";
 import Setting from "./setting";
-//import Tags from './tags';
+import EditArticle from "./editAericle";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -52,19 +51,6 @@ class App extends React.Component {
   render() {
     return (
       <>
-        {/* <Switch>
-          <Route path="/" exact>
-            <Tags />
-          </Route>
-          <Route path="/signin">
-            <Login />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route path="/articles/:slug" component={SingleArticle}></Route>
-        </Switch> */}
-
         <Header isLoggedIn={this.state.isLoggedIn} user={this.state.user} />
         {this.state.isLoggedIn ? (
           <AuthenticatedApp
@@ -101,7 +87,7 @@ function AuthenticatedApp(props) {
         <SingleArticle user={props.user} />
       </Route>
       <Route path="/editArticle/:slug">
-        {/* <EditArticle user={props.user} /> */}
+        <EditArticle user={props.user} />
       </Route>
       <Route path="*">{/* <NoMatch /> */}</Route>
     </Switch>

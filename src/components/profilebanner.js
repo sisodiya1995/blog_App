@@ -1,8 +1,7 @@
 import React from "react";
-//import { ROOT_URL } from '../utils/constant';
 import { withRouter } from "react-router";
-//import Loader from './Loader';
 import { Link } from "react-router-dom";
+import Loader from "./loder";
 class ProfileBanner extends React.Component {
   state = {
     profile: null,
@@ -14,7 +13,7 @@ class ProfileBanner extends React.Component {
     let { username } = this.props;
 
     fetch(
-      "https://mighty-oasis-08080.herokuapp.com/api/" + `profiles/${username}`,
+      "https://api.realworld.io/api/" + `profiles/${username}`,
       {
         method: "GET",
         headers: {
@@ -43,7 +42,7 @@ class ProfileBanner extends React.Component {
   }
 
   render() {
-    if (!this.state.profile) return <h2>loading ...</h2>;
+    if (!this.state.profile) return <Loader/>
     let { username, image, bio } = this.state.profile;
     return (
       <>

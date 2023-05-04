@@ -1,5 +1,5 @@
 import React from "react";
-//import Header from "./header";
+
 import {NavLink} from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
 class Login extends React.Component {
@@ -39,37 +39,9 @@ class Login extends React.Component {
 
   handlesubmit =(event) => {
    event.preventDefault()
-  //   fetch("https://mighty-oasis-08080.herokuapp.com/api/users/login", {
-   
-  //     // Adding method type
-  //     method: "POST",
-       
-  //     // Adding body or contents to send
-  //     body: JSON.stringify({
-  //         user :{
-           
-  //           email : this.state.email ,
-  //           password : this.state.password
-  //         }
-  //     }),
-       
-  //     // Adding headers to the request
-  //     headers: {
-  //         "Content-type": "application/json; charset=UTF-8",
-  //         Authorzation : "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
-
-  //     }
-  // })
-   
-  // // Converting to JSON
-  // .then(response => response.json())
-   
-  // // Displaying results to console
-  // // .then(json => console.log(json));
-  //  this.props.history.push('/')
 
   const { email, password } = this.state;
-  fetch("https://mighty-oasis-08080.herokuapp.com/api/users/login", {
+  fetch("https://api.realworld.io/api/users/login", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -106,7 +78,7 @@ class Login extends React.Component {
   render() {
     return (
       <>
-        {/* <Header /> */}
+    
 
         <h3>Sign IN</h3>
         

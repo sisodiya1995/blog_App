@@ -1,11 +1,9 @@
 import React from 'react';
-//import { articleURL } from '../utils/constant';
-// import Pagination from './Pagination';
 import Posts from './posts';
 
 import { withRouter } from 'react-router';
 import Profilebanner from './profilebanner';
-//import Loader from './Loader';
+import Loader from './loder';
 
 class Profile extends React.Component {
   state = {
@@ -15,7 +13,7 @@ class Profile extends React.Component {
 
   FetchData = () => {
     const slug = this.props.match.params.username;
-    fetch("https://mighty-oasis-08080.herokuapp.com/api/articles" + `/?${this.state.activeTab}=${slug}`)
+    fetch("https://api.realworld.io/api/articles" + `/?${this.state.activeTab}=${slug}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`can not fetch deta for specific user`);
@@ -50,8 +48,8 @@ class Profile extends React.Component {
     const { activeTab } = this.setState;
     const slug = this.props.match.params.username;
     if (!this.state.articles) {
-    //   <Loader />;
-        return <h2>loading ...</h2>
+   
+        return <Loader/>
     }
 
     return (
@@ -76,7 +74,6 @@ class Profile extends React.Component {
               </div>
 
               <Posts articles={this.state.articles} />
-              {/* <Pagination /> */}
             </div>
           </div>
         </section>

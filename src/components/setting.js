@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
-//import { SettingURL } from '../utils/constant';
-//import validation from '../utils/validation';
+
 
 class Setting extends React.Component {
   state = {
@@ -43,7 +42,7 @@ class Setting extends React.Component {
     event.preventDefault();
     let { image, username, bio, email, password } = this.state;
 
-    fetch("https://mighty-oasis-08080.herokuapp.com/api/user", {
+    fetch("https://api.realworld.io/api/user", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -1,12 +1,14 @@
 import React from 'react';
 //import { articleURL } from '../utils/constant';
-import {withRouter} from 'react-router-dom'
-class NewPost extends React.Component {
+import { withRouter } from 'react-router';
+// import Loader from './Loader';
+class EditArticle extends React.Component {
   state = {
     title: '',
     description: '',
     body: '',
     tagList: '',
+    error: '',
     errors: {
       title: '',
       description: '',
@@ -15,6 +17,31 @@ class NewPost extends React.Component {
     },
   };
 
+  componentDidMount() {
+    let slug = this.props.match.params.slug;
+    fetch("https://api.realworld.io/api/articles" + '/' + slug)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        } else {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        let { title, description, body, tagList } = data.article;
+
+        this.setState({
+          title: title,
+          description: description,
+          body: body,
+          tagList: tagList,
+        });
+      })
+      .catch((error) => {
+        this.setState({ error: 'article is not fetch' });
+      });
+  }
+
   handleChange = (event) => {
     let { name, value } = event.target;
     let errors = { ...this.state.error };
@@ -22,10 +49,11 @@ class NewPost extends React.Component {
   };
 
   handleSubmit = (event) => {
+    let slug = this.props.match.params.slug;
     event.preventDefault();
     const { title, description, body, tagList } = this.state;
-    fetch('https://api.realworld.io/api/articles', {
-      method: 'POST',
+    fetch("https://mighty-oasis-08080.herokuapp.com/api/articles" + '/' + slug, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         authorization: `Token ${this.props.user.token}`,
@@ -46,14 +74,14 @@ class NewPost extends React.Component {
         return res.json();
       })
       .then(({ article }) => {
-        console.log(article);
+        // console.log(article);
         this.setState({
           title: '',
           description: '',
           body: '',
           tagList: '',
         });
-        this.props.history.push('/');
+        this.props.history.push(`/article/${this.props.match.params.slug}`);
       })
       .catch((errors) => this.setState({ errors }));
   };
@@ -63,15 +91,14 @@ class NewPost extends React.Component {
     return (
       <>
         <div>
-          <form action="" className="signup-form-1">
-            <h4>Add Your Article</h4>
-            <input className='bottom'
+          <form action="" className="form-control">
+            <h3>Update Article</h3>
+            <input
               type="text"
               name="title"
               placeholder="Article Title"
               onChange={this.handleChange}
               value={title}
-              
             />
 
             <input
@@ -98,13 +125,13 @@ class NewPost extends React.Component {
               onChange={this.handleChange}
               value={tagList}
             />
-            <div className="flex justify-end width">
+            <div>
               <button
-                className="btn"
+                className="publish-btn"
                 type="submit"
                 onClick={this.handleSubmit}
               >
-                Publish Article
+                Update Article
               </button>
             </div>
           </form>
@@ -113,5 +140,4 @@ class NewPost extends React.Component {
     );
   }
 }
-
-export default withRouter(NewPost);
+export default withRouter(EditArticle);
